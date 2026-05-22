@@ -1,0 +1,87 @@
+<div class="container">
+
+  <!-- BARRA DI RICERCA -->
+  <div class="search-bar">
+    <input [(ngModel)]="filtri.partenza" placeholder="Città partenza" />
+    <input [(ngModel)]="filtri.arrivo" placeholder="Città arrivo" />
+    <input [(ngModel)]="filtri.data" type="date" />
+    <button (click)="cercaVoli()" class="btn-cerca">🔍 Cerca</button>
+  </div>
+
+  <!-- LIVELLO 1: COMPAGNIE -->
+  @if (vista === 'compagnie') {
+    <h2>✈️ Scegli una Compagnia Aerea</h2>
+    <div class="card-grid">
+      @for (c of compagnie; track c.id_compagnia) {
+        <div class="card" (click)="selezionaCompagnia(c)">
+          <h3>{{ c.nome }}</h3>
+          <p>{{ c.paese }}</p>
+          <span class="badge">{{ c.codice_iata }}</span>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- LIVELLO 2: LISTA VOLI -->
+  @if (vista === 'voli') {
+    <div class="breadcrumb">
+      <span (click)="tornaACompagnie()" class="link">Compagnie</span>
+      <span> › </span>
+      <span>{{ compagniaSelezionata ? compagniaSelezionata.nome : 'Risultati ricerca' }}</span>
+    </div>
+    <h2>Voli disponibili ({{ voli.length }})</h2>
+    @if (voli.length === 0) {
+      <div class="empty">Nessun volo trovato.</div>
+    }
+    @for (v of voli; track v.id_volo) {
+      <div class="volo-card" (click)="selezionaVolo(v)">
+        <div class="volo-tratta">
+          <span>{{ v.citta_partenza }}</span>
+          <span class="freccia">→</span>
+          <span>{{ v.citta_arrivo }}</span>
+        </div>
+        <div class="volo-info">
+          <span>{{ v.numero_volo }}</span>
+          <span>{{ v.data_partenza | date:'dd/MM/yyyy HH:mm' }}</span>
+          <span class="prezzo">€{{ v.prezzo_base }}</span>
+        </div>
+      </div>
+    }
+  }
+
+  <!-- LIVELLO 3: DETTAGLIO VOLO -->
+  @if (vista === 'dettaglio' && voloSelezionato) {
+    <div class="breadcrumb">
+      <span (click)="tornaACompagnie()" class="link">Compagnie</span>
+      <span> › </span>
+      <span (click)="tornaAVoli()" class="link">Voli</span>
+      <span> › </span>
+      <span>{{ voloSelezionato.numero_volo }}</span>
+    </div>
+    <div class="dettaglio-card">
+      <h2>Volo {{ voloSelezionato.numero_volo }}</h2>
+      <div class="dettaglio-tratta">
+        <div>
+          <h3>{{ voloSelezionato.citta_partenza }}</h3>
+          <p>{{ voloSelezionato.nome_aeroporto_partenza }}</p>
+          <p>{{ voloSelezionato.data_partenza | date:'dd/MM/yyyy HH:mm' }}</p>
+        </div>
+        <div class="freccia-grande">✈️</div>
+        <div>
+          <h3>{{ voloSelezionato.citta_arrivo }}</h3>
+          <p>{{ voloSelezionato.nome_aeroporto_arrivo }}</p>
+          <p>{{ voloSelezionato.data_arrivo | date:'dd/MM/yyyy HH:mm' }}</p>
+        </div>
+      </div>
+      <div class="dettaglio-info">
+        <p><strong>Compagnia:</strong> {{ voloSelezionato.compagnia_nome }}</p>
+        <p><strong>Aereo:</strong> {{ voloSelezionato.aereo_modello }}</p>
+        <p><strong>Capienza:</strong> {{ voloSelezionato.capienza }} posti</p>
+        <p><strong>Stato:</strong> {{ voloSelezionato.stato }}</p>
+        <p class="prezzo-grande">€{{ voloSelezionato.prezzo_base }}</p>
+      </div>
+      <a routerLink="/lemieprenotazioni" class="btn-prenota">Prenota Ora</a>
+    </div>
+  }
+
+</div>

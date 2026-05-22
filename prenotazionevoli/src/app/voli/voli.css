@@ -1,0 +1,136 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.search-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.search-bar input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  flex: 1;
+  min-width: 150px;
+}
+
+.btn-cerca {
+  padding: 10px 20px;
+  background: #0f3460;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.badge {
+  background: #0f3460;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.breadcrumb {
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.breadcrumb .link {
+  color: #0f3460;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.volo-card {
+  padding: 15px 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.volo-card:hover {
+  background: #f5f5f5;
+}
+
+.volo-tratta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.freccia { color: #0f3460; }
+
+.volo-info {
+  display: flex;
+  gap: 20px;
+  color: #666;
+}
+
+.prezzo { color: #e94560; font-weight: bold; }
+
+.dettaglio-card {
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+.dettaglio-tratta {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.freccia-grande { font-size: 2rem; }
+
+.dettaglio-info p { margin: 8px 0; }
+
+.prezzo-grande {
+  font-size: 1.8rem;
+  color: #e94560;
+  font-weight: bold;
+}
+
+.btn-prenota {
+  display: inline-block;
+  padding: 12px 30px;
+  background: #e94560;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+.empty { color: #999; text-align: center; padding: 40px; }

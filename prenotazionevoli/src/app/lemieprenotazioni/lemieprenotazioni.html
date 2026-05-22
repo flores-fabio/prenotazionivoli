@@ -1,0 +1,51 @@
+<div class="container">
+  <h2>📋 Le Mie Prenotazioni</h2>
+
+  <!-- FORM NUOVA PRENOTAZIONE -->
+  <div class="form-card">
+    <h3>➕ Nuova Prenotazione</h3>
+
+    <div *ngIf="errore" class="errore">{{ errore }}</div>
+    <div *ngIf="messaggio" class="successo">{{ messaggio }}</div>
+
+    <div class="form-group">
+      <label>Utente</label>
+      <select [(ngModel)]="nuovaPrenotazione.id_utente">
+        <option value="">-- Seleziona utente --</option>
+        <option *ngFor="let u of utenti" [value]="u.id_utente">
+          {{ u.nome }} {{ u.cognome }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Volo</label>
+      <select [(ngModel)]="nuovaPrenotazione.id_volo">
+        <option value="">-- Seleziona volo --</option>
+        <option *ngFor="let v of voli" [value]="v.id_volo">
+          {{ v.numero_volo }} — {{ v.citta_partenza }} → {{ v.citta_arrivo }}
+        </option>
+      </select>
+    </div>
+
+    <button (click)="creaPrenotazione()" class="btn-prenota">Prenota</button>
+  </div>
+
+  <!-- LISTA PRENOTAZIONI -->
+  <h3>Prenotazioni esistenti ({{ prenotazioni.length }})</h3>
+  <div *ngIf="prenotazioni.length === 0" class="empty">Nessuna prenotazione trovata.</div>
+
+  <div class="prenotazione-card" *ngFor="let p of prenotazioni">
+    <div class="prenotazione-header">
+      <span class="numero">#{{ p.id_prenotazione }}</span>
+      <span class="stato" [class.confermata]="p.stato === 'confermata'">{{ p.stato }}</span>
+    </div>
+    <div class="prenotazione-body">
+      <p><strong>Passeggero:</strong> {{ p.utente_nome }} {{ p.utente_cognome }}</p>
+      <p><strong>Volo:</strong> {{ p.numero_volo }}</p>
+      <p><strong>Tratta:</strong> {{ p.citta_partenza }} → {{ p.citta_arrivo }}</p>
+      <p><strong>Totale:</strong> €{{ p.totale }}</p>
+      <p><strong>Data:</strong> {{ p.data_prenotazione | date:'dd/MM/yyyy HH:mm' }}</p>
+    </div>
+  </div>
+</div>
